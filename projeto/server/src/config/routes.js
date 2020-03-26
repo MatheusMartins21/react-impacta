@@ -6,7 +6,9 @@ module.exports = server => {
 
     const serviceCursos = require('../api/cursos/service');
     const serviceContatos = require('../api/contatos/service');
+    const serviceCompromissos = require('../api/compromissos/service');
 
     serviceCursos.register(router, '/cursos');
     serviceContatos.register(router, '/contatos');
+    serviceCompromissos.register(router, '/compromissos');
 }

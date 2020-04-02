@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { limpar } from './curso';
 const URL = 'http://localhost:3200/api/contatos';
 
 export const setData = e => ({

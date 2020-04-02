@@ -1,25 +1,42 @@
 import React from 'react';
 import { CursoForm } from './form';
 import { CursosLista } from './list';
+import {connect} from 'react-redux';
 
-export class CursoCadastro extends React.Component {
-
+class CursoCadastro extends React.Component {
     render() {
-        const cursos = [
-            { _id: 1, codigo: 123, descricao: 'React' },
-            { _id: 2, codigo: 321, descricao: 'Mean' },
-            { _id: 3, codigo: 112, descricao: 'Vue' }
-        ];
-
         return (
-            <div className="row border-bottom">
-                <div className="col-md-6">
-                    <CursoForm/>
-                </div>
-                <div className="col-md-6">
-                    <CursosLista cursos={cursos} />
+            <div>
+                {this.props.msgSucesso ?
+                    <div className="alert alert-success" role="alert">
+                        <strong>Parabéns</strong> {this.props.msgSucesso}
+                    </div>
+                    : null
+                }
+
+                {this.props.msgErro ?
+                    <div className="alert alert-danger" role="alert">
+                        <strong>Ops!</strong> {this.props.msgErro}
+                    </div>
+                    : null
+                }
+                <div className="row border-bottom">
+                    <div className="col-md-6">
+                        <CursoForm/>
+                    </div>
+                    <div className="col-md-6">
+                        <CursosLista />
+                    </div>
                 </div>
             </div>
         );
     }
 }
+
+const mapStoreToProps = store => ({
+    msgSucesso: store.curso.msgSucess,
+    msgErro: store.curso.msgErro
+})
+
+const conectado = connect(mapStoreToProps, null)(CursoCadastro);
+export { conectado as CursoCadastro};
